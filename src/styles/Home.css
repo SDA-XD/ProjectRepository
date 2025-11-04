@@ -1,0 +1,96 @@
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, rgba(255, 153, 51, 0.1) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(46, 204, 113, 0.1) 100%);
+  border-radius: 16px;
+  border: 2px solid rgba(255, 153, 51, 0.3);
+}
+
+.hero-section h1 {
+  font-size: 42px;
+  color: #2ECC71;
+  margin-bottom: 10px;
+}
+
+.welcome-message {
+  font-size: 20px;
+  color: #FF9933;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.hero-section .subtitle {
+  font-size: 18px;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.content-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid #f0f0f0;
+  border-top: 4px solid #FF9933;
+  border-bottom: 4px solid #2ECC71;
+}
+
+.content-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(255, 153, 51, 0.3);
+}
+
+.card-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.content-card h2 {
+  font-size: 22px;
+  color: #2ECC71;
+  margin-bottom: 12px;
+}
+
+.content-card p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.admin-card {
+  border-color: #f56565;
+  background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+}
+
+.expert-card {
+  border-color: #48bb78;
+  background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+}
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 32px;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}

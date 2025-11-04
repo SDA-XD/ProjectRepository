@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Dhanush Abhiram",
+    "email": "2400030359@kluniversity.in",
+    "password": "pb_lrcss",
+    "role": "citizen"
+  },
+  {
+    "name": "Sasihithlu Dhanush Abhiram",
+    "email": "dhanush.abhiram.0@gmail.com",
+    "password": "pb_lrcss",
+    "role": "expert"
+  },
+  {
+    "name": "Dhanush Abhiram",
+    "email": "das0xd.0@gmail.com",
+    "password": "pb_lrcss",
+    "role": "citizen"
+  },
+  {
+    "name": "KL 2400030359",
+    "email": "random@domain.in",
+    "password": "pb_lrcss",
+    "role": "expert"
+  },
+  {
+    "name": "admin",
+    "email": "admin@domain.in",
+    "password": "pb_lrcss",
+    "role": "admin"
+  },
+  {
+    "name": "expert",
+    "email": "expert@domain.in",
+    "password": "pb_lrcss",
+    "role": "expert"
+  },
+  {
+    "name": "user",
+    "email": "user@domain.in",
+    "password": "pb_lrcss",
+    "role": "citizen"
+  },
+  {
+    "name": "admin2.0",
+    "email": "admin2@domain.in",
+    "password": "pb_lrcss",
+    "role": "admin"
+  },
+  {
+    "name": "random",
+    "email": "random2@domain.in",
+    "password": "pb_lrcss",
+    "role": "citizen"
+  }
+]
