@@ -11,7 +11,7 @@ function Framework() {
 
       <div className="content-sections">
         <section className="content-section">
-          <h2>📜 Preamble</h2>
+          <h2> Preamble</h2>
           <p>
             WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a 
             <strong> SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC</strong> and to secure to all its citizens:
@@ -25,7 +25,7 @@ function Framework() {
         </section>
 
         <section className="content-section">
-          <h2>🏛️ Union and its Territory</h2>
+          <h2> Union and its Territory</h2>
           <p>
             India, that is Bharat, shall be a Union of States. The territory of India comprises:
           </p>
@@ -37,7 +37,7 @@ function Framework() {
         </section>
 
         <section className="content-section">
-          <h2>📖 Parts of the Constitution</h2>
+          <h2> Parts of the Constitution</h2>
           <p>
             The Constitution is divided into <strong>25 Parts</strong> containing <strong>448 Articles</strong> and <strong>12 Schedules</strong>.
           </p>

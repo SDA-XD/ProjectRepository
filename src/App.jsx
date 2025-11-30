@@ -13,7 +13,7 @@ import Account from './pages/Account';
 import Quiz from './pages/Quiz';
 import AskExpert from './pages/AskExpert';
 import ExpertDashboard from './pages/ExpertDashboard';
-import UserStats from './pages/UserStats';   // ✅ ADD THIS IMPORT
+import UserStats from './pages/UserStats';  
 import './index.css';
 
 function App() {
@@ -38,7 +38,6 @@ function App() {
       {user && <Navbar />}
 
       <Routes>
-        {/* Public routes */}
         <Route 
           path="/login" 
           element={user ? <Navigate to="/" /> : <LoginPage />} 
@@ -48,7 +47,6 @@ function App() {
           element={user ? <Navigate to="/" /> : <SignupPage />} 
         />
 
-        {/* Protected routes */}
         <Route 
           path="/" 
           element={user ? <Home /> : <Navigate to="/login" />} 
@@ -87,7 +85,6 @@ function App() {
           element={user ? <ExpertDashboard /> : <Navigate to="/login" />}
         />
 
-        {/* ✅ NEW ROUTE FOR ADMIN STATS PAGE */}
         <Route 
           path="/user-stats" 
           element={user && user.role === 'admin' ? <UserStats /> : <Navigate to="/" />} 

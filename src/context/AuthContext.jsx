@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error parsing user from localStorage:', error);
-      localStorage.removeItem('user'); // Clear corrupted data
+      localStorage.removeItem('user'); 
     }
     setLoading(false);
   }, []);

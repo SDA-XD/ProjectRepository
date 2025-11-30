@@ -35,35 +35,31 @@ function Navbar() {
             <Link to="/duties" className="nav-link">Fundamental Duties</Link>
           </li>
 
-          {/* Admin + Expert dashboard */}
+        
           {(user.role === 'admin' || user.role === 'expert') && (
             <li className="nav-item">
               <Link to="/dashboard" className="nav-link">Dashboard</Link>
             </li>
           )}
 
-          {/* ✅ Admin-only: View User Stats */}
           {user.role === 'admin' && (
             <li className="nav-item">
               <Link to="/user-stats" className="nav-link">View User Stats</Link>
             </li>
           )}
 
-          {/* ✅ Citizen-only: Quiz */}
           {user.role === 'citizen' && (
             <li className="nav-item">
               <Link to="/quiz" className="nav-link">Quiz</Link>
             </li>
           )}
 
-          {/* ✅ Citizen-only: Ask Expert */}
           {user.role === 'citizen' && (
             <li className="nav-item">
               <Link to="/ask-expert" className="nav-link">Ask Expert</Link>
             </li>
           )}
 
-          {/* ✅ Expert-only: Expert Dashboard */}
           {user.role === 'expert' && (
             <li className="nav-item">
               <Link to="/expert-dashboard" className="nav-link">Expert Dashboard</Link>
@@ -77,6 +73,7 @@ function Navbar() {
 
         <div className="nav-user">
           <span className="user-name">{user.name}</span>
+          
           <button onClick={handleLogout} className="btn-logout">Logout</button>
         </div>
       </div>

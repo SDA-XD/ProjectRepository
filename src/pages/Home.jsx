@@ -18,26 +18,26 @@ function Home() {
 
       <div className="content-grid">
         <Link to="/framework" className="content-card">
-          <div className="card-icon">📜</div>
+          <div className="card-icon"></div>
           <h2>Constitutional Framework</h2>
           <p>Understand the structure and organization of the Indian Constitution</p>
         </Link>
 
         <Link to="/rights" className="content-card">
-          <div className="card-icon">⚖️</div>
+          <div className="card-icon"></div>
           <h2>Fundamental Rights</h2>
           <p>Explore the rights guaranteed to all citizens under the Constitution</p>
         </Link>
 
         <Link to="/duties" className="content-card">
-          <div className="card-icon">🤝</div>
+          <div className="card-icon"></div>
           <h2>Fundamental Duties</h2>
           <p>Learn about the duties expected from every citizen of India</p>
         </Link>
 
         {user.role === 'admin' && (
           <Link to="/dashboard" className="content-card admin-card">
-            <div className="card-icon">👤</div>
+            <div className="card-icon"></div>
             <h2>Admin Dashboard</h2>
             <p>Manage platform content and user roles</p>
           </Link>
@@ -45,7 +45,7 @@ function Home() {
 
         {user.role === 'expert' && (
           <Link to="/dashboard" className="content-card expert-card">
-            <div className="card-icon">⚖️</div>
+            <div className="card-icon"></div>
             <h2>Expert Dashboard</h2>
             <p>Provide legal insights and update content</p>
           </Link>

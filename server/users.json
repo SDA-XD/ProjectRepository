@@ -24,7 +24,7 @@
     "role": "expert"
   },
   {
-    "name": "admin",
+    "name": "admi",
     "email": "admin@domain.in",
     "password": "pb_lrcss",
     "role": "admin"
@@ -52,5 +52,23 @@
     "email": "random2@domain.in",
     "password": "pb_lrcss",
     "role": "citizen"
+  },
+  {
+    "name": "hello test",
+    "email": "test@domain.in",
+    "password": "123@test",
+    "role": "citizen"
+  },
+  {
+    "name": "test",
+    "email": "test2@domain.in",
+    "password": "test1234",
+    "role": "citizen"
+  },
+  {
+    "name": "experto",
+    "email": "expert2@domain.in",
+    "password": "pb_lrcss",
+    "role": "expert"
   }
 ]

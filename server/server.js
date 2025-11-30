@@ -1,3 +1,5 @@
+require('dotenv').config(); // ✅ load RECAPTCHA_SECRET_KEY from .env
+
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
@@ -7,16 +9,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Use absolute path
 const usersFile = path.join(__dirname, 'users.json');
 
-// Initialize if doesn't exist
 if (!fs.existsSync(usersFile)) {
   fs.writeFileSync(usersFile, '[]');
   console.log('Created users.json');
 }
 
-// Read users
 const getUsers = () => {
   try {
     const data = fs.readFileSync(usersFile, 'utf-8');
@@ -27,7 +26,6 @@ const getUsers = () => {
   }
 };
 
-// Save users
 const saveUsers = (users) => {
   try {
     fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
@@ -37,9 +35,8 @@ const saveUsers = (users) => {
   }
 };
 
-// SIGNUP
 app.post('/api/signup', (req, res) => {
-  console.log('📝 Signup request received:', req.body);
+  console.log(' Signup request received:', req.body);
 
   const { name, email, password, role } = req.body;
 
@@ -57,13 +54,36 @@ app.post('/api/signup', (req, res) => {
   users.push(newUser);
   saveUsers(users);
 
-  console.log('✅ User created:', email);
+  console.log(' User created:', email);
   res.json({ success: true, message: 'Account created!', user: { name, email, role: newUser.role } });
 });
 
-// LOGIN
-app.post('/api/login', (req, res) => {
-  const { email, password, role } = req.body;
+// ✅ LOGIN with Google reCAPTCHA verification (minimal change)
+app.post('/api/login', async (req, res) => {
+  const { email, password, role, captchaToken } = req.body;
+
+  // verify reCAPTCHA first
+  try {
+    const params = new URLSearchParams();
+    params.append('secret', process.env.RECAPTCHA_SECRET_KEY);
+    params.append('response', captchaToken);
+
+    const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
+    });
+    const verifyData = await verifyRes.json();
+
+    if (!verifyData.success) {
+      return res.status(400).json({ success: false, message: 'Captcha verification failed' });
+    }
+  } catch (e) {
+    console.error('Captcha verify error:', e);
+    return res.status(400).json({ success: false, message: 'Captcha verification failed' });
+  }
+
+  // existing login logic
   const users = getUsers();
   const user = users.find(u => u.email === email && u.password === password && u.role === role);
 
@@ -74,7 +94,6 @@ app.post('/api/login', (req, res) => {
   }
 });
 
-// UPDATE PROFILE
 app.put('/api/user/update', (req, res) => {
   const { currentEmail, newEmail, name } = req.body;
   const users = getUsers();
@@ -91,11 +110,9 @@ app.put('/api/user/update', (req, res) => {
   res.json({ success: true, user: { name, email: newEmail, role: users[idx].role } });
 });
 
-// ✅ GET USERS (Admin View — includes user count & role stats)
 app.get('/api/users', (req, res) => {
   const users = getUsers();
 
-  // Calculate breakdown by role
   const roleBreakdown = users.reduce((acc, user) => {
     const role = user.role || 'citizen';
     acc[role] = (acc[role] || 0) + 1;
@@ -106,14 +123,12 @@ app.get('/api/users', (req, res) => {
     success: true,
     totalUsers: users.length,
     roleBreakdown,
-    users: users.map(({ password, ...u }) => u) // Hide passwords
+    users: users.map(({ password, ...u }) => u)
   });
 });
 
-// ✅ LEGAL EXPERT Q&A SECTION
 const questionsFile = path.join(__dirname, 'questions.json');
 
-// create file if missing
 if (!fs.existsSync(questionsFile)) {
   fs.writeFileSync(questionsFile, '[]');
   console.log('Created questions.json');
@@ -131,7 +146,6 @@ const saveQuestions = (data) => {
   fs.writeFileSync(questionsFile, JSON.stringify(data, null, 2));
 };
 
-// Citizen asks a question
 app.post('/api/questions', (req, res) => {
   const { name, email, question } = req.body;
   if (!question) return res.status(400).json({ success: false, message: 'Question is required' });
@@ -143,12 +157,10 @@ app.post('/api/questions', (req, res) => {
   res.json({ success: true, message: 'Question submitted', data: newQ });
 });
 
-// Expert fetches all questions
 app.get('/api/questions', (req, res) => {
   res.json({ success: true, data: getQuestions() });
 });
 
-// Expert answers a question
 app.put('/api/questions/:id', (req, res) => {
   const { id } = req.params;
   const { answer } = req.body;
@@ -162,6 +174,6 @@ app.put('/api/questions/:id', (req, res) => {
 });
 
 app.listen(5000, () => {
-  console.log('\n✅ Server running on port 5000');
-  console.log(`📁 Database file: ${usersFile}\n`);
+  console.log('\n Server running on port 5000');
+  console.log(` Database file: ${usersFile}\n`);
 });

@@ -25,7 +25,7 @@ function Duties() {
 
       <div className="content-sections">
         <section className="content-section">
-          <h2>📋 Article 51A - Fundamental Duties</h2>
+          <h2> Article 51A - Fundamental Duties</h2>
           <p>
             It shall be the duty of every citizen of India:
           </p>

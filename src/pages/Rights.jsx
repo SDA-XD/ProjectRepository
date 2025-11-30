@@ -39,7 +39,7 @@ function Rights() {
       <div className="content-sections">
         {rights.map((right, index) => (
           <section key={index} className="content-section">
-            <h2>⚖️ {right.title}</h2>
+            <h2> {right.title}</h2>
             <p>{right.description}</p>
           </section>
         ))}
