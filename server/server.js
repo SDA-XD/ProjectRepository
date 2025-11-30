@@ -1,5 +1,3 @@
-require('dotenv').config(); // ✅ load RECAPTCHA_SECRET_KEY from .env
-
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
@@ -58,32 +56,8 @@ app.post('/api/signup', (req, res) => {
   res.json({ success: true, message: 'Account created!', user: { name, email, role: newUser.role } });
 });
 
-// ✅ LOGIN with Google reCAPTCHA verification (minimal change)
-app.post('/api/login', async (req, res) => {
-  const { email, password, role, captchaToken } = req.body;
-
-  // verify reCAPTCHA first
-  try {
-    const params = new URLSearchParams();
-    params.append('secret', process.env.RECAPTCHA_SECRET_KEY);
-    params.append('response', captchaToken);
-
-    const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString()
-    });
-    const verifyData = await verifyRes.json();
-
-    if (!verifyData.success) {
-      return res.status(400).json({ success: false, message: 'Captcha verification failed' });
-    }
-  } catch (e) {
-    console.error('Captcha verify error:', e);
-    return res.status(400).json({ success: false, message: 'Captcha verification failed' });
-  }
-
-  // existing login logic
+app.post('/api/login', (req, res) => {
+  const { email, password, role } = req.body;
   const users = getUsers();
   const user = users.find(u => u.email === email && u.password === password && u.role === role);
 
@@ -123,9 +97,10 @@ app.get('/api/users', (req, res) => {
     success: true,
     totalUsers: users.length,
     roleBreakdown,
-    users: users.map(({ password, ...u }) => u)
+    users: users.map(({ password, ...u }) => u) 
   });
 });
+
 
 const questionsFile = path.join(__dirname, 'questions.json');
 
@@ -145,6 +120,7 @@ const getQuestions = () => {
 const saveQuestions = (data) => {
   fs.writeFileSync(questionsFile, JSON.stringify(data, null, 2));
 };
+
 
 app.post('/api/questions', (req, res) => {
   const { name, email, question } = req.body;
